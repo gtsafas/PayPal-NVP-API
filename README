@@ -15,6 +15,8 @@ Setting API Version (You can also do when creating object)
 Setting End point (Useful if you want to test in sandbox)
 -SetEndPoint(str)
 
+Setting EC End point (Useful if you want to test in sandbox)
+-SetECEndPoint(str)
 
 DoDirectPayment(array)
 DoCapture(array)
@@ -55,12 +57,12 @@ $pp = new PayPalNVP(array(
 
 $details = array(
     'AMT'	     => '50.02',
-    'ZIP'	     => '07020',
-    'CITY'	     => 'Edgewater',
+    'ZIP'	     => '11566',
+    'CITY'	     => 'Merrick',
     'CVV2'	     => '000',
-    'ACCT'	     => '47681x99606062564',
-    'STATE'	     => 'NJ',
-    'STREET'	     => '10 Tower Drive',
+    'ACCT'	     => '476819606062564',
+    'STATE'	     => 'NY',
+    'STREET'	     => '1 Flower Drive',
     'EXPDATE'	     => '052012',
     'LASTNAME'	     => 'Tsafas',
     'FIRSTNAME'	     => 'George',
