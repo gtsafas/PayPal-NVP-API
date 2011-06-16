@@ -1,0 +1,101 @@
+
+// Notes: 
+
+This is in by no means a full implimentation of PayPals NVP API.
+I have only written methods for what I needed. They are simple to
+implement. 
+
+You can do whatever you like this this code.
+
+I only have interfaces for,
+
+Setting API Version (You can also do when creating object)
+-SetAPIVersion(str)
+
+Setting End point (Useful if you want to test in sandbox)
+-SetEndPoint(str)
+
+
+DoDirectPayment(array)
+DoCapture(array)
+SetExpressCheckout(array)
+GetExpressCheckout(str) //Takes a token
+DoExpressCheckout(array)
+
+
+- All methods will return an object, I will give you back everything PayPal does according to the API version you are using
+
+
+Two methods will return non standard variables,
+
+-- SetExpressCheckout
+--- CLEAN_TOKEN is just a urldecoded token
+--- CHECKOUT_URL is the link you need to redirect the user to for paypal to process
+
+-- GetExpressCheckout
+--- CLEAN_TOKEN same as above
+
+
+
+// Validation:
+
+I try to validate the required fields decently. You still should be watching for throws
+as well as checking the PayPal responses
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+//  Basic usage example
+////////////////////////////////////////////////////////////////////////////////////
+
+$pp = new PayPalNVP(array(
+    'UserName'	=> 'seller_139441_biz_api1.gmail.com',
+    'Password'	=> '130689946',
+    'Signature' => 'AYBgIuot3ZEeAX6OGYqN7crDHtyexHvRJ43R9Bk1'
+));
+
+$details = array(
+    'AMT'	     => '50.02',
+    'ZIP'	     => '07020',
+    'CITY'	     => 'Edgewater',
+    'CVV2'	     => '000',
+    'ACCT'	     => '47681x99606062564',
+    'STATE'	     => 'NJ',
+    'STREET'	     => '10 Tower Drive',
+    'EXPDATE'	     => '052012',
+    'LASTNAME'	     => 'Tsafas',
+    'FIRSTNAME'	     => 'George',
+    'COUNTRYCODE'    => 'US',
+    'CREDITCARDTYPE' => 'VISA',
+    'PAYMENTACTION'  => 'Authorization'
+
+);
+
+
+try 
+{
+    $transaction = $pp->DoDirectPayment($details);
+} 
+catch (Exception $e) 
+{
+    echo $e->getMessage();
+}
+
+
+$details = array(
+    'AUTHORIZATIONID'	=> $transaction['TRANSACTIONID'],
+    'AMT'		=> $transaction['AMT'],
+    'CURRENCYCODE'	=> 'USD',
+    'COMPLETETYPE'	=> 'Complete'
+);
+
+try
+{
+    $capture = $pp->DoCapture($details);
+}
+catch (Exception $e)
+{
+    echo $e->getMessage();
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
