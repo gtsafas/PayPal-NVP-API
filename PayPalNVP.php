@@ -114,6 +114,19 @@ class PayPalNVP
 	}
     }
 
+    public function SetECEndPoint($EndPoint)
+    {
+	if (isset($EndPoint))
+	{
+	    $this->ECEndPoint = $EndPoint;
+	    return true;
+	}
+	else
+	{
+	    return false;
+	}
+    }
+
     private function _FieldExists( $pattern, $input, $flags = 0 )
     {
 	$keys = preg_grep( $pattern, array_keys( $input ), $flags );
