@@ -84,8 +84,8 @@ catch (Exception $e)
 
 
 $details = array(
-    'AUTHORIZATIONID'	=> $transaction['TRANSACTIONID'],
-    'AMT'		=> $transaction['AMT'],
+    'AUTHORIZATIONID'	=> $transaction->TRANSACTIONID,
+    'AMT'		=> $transaction->AMT,
     'CURRENCYCODE'	=> 'USD',
     'COMPLETETYPE'	=> 'Complete'
 );
